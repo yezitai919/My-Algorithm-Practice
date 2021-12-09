@@ -9,15 +9,6 @@ import java.util.Scanner;
  * @Since version-1.0
  */
 public class Demo01 {
-     /*输入数据：
-    5 5
-    2 2
-    2
-    1 1 1 1 1
-    0 0 1 0 0
-    1 1 2 1 1
-    0 0 1 0 0
-    1 1 1 1 1*/
     /**
      * 长
      */
@@ -39,25 +30,28 @@ public class Demo01 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        m = sc.nextInt();
-        map = new int[n][m];
-        fire[0] = sc.nextInt();
-        fire[1] = sc.nextInt();
-        cutNum = sc.nextInt();
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                map[j][i] = sc.nextInt();
+        int cases = sc.nextInt();
+        System.out.println();
+        for (int i = 0; i < cases; i++) {
+            n = sc.nextInt();
+            m = sc.nextInt();
+            map = new int[n][m];
+            fire[0] = sc.nextInt();
+            fire[1] = sc.nextInt();
+            cutNum = sc.nextInt();
+            for (int j = 0; j < m; j++) {
+                for (int k = 0; k < n; k++) {
+                    map[k][j] = sc.nextInt();
+                }
             }
+            /*计算初始能烧的树的坐标*/
+            BurningTreesDFS treesDFS = new BurningTreesDFS(n,m,fire,map);
+            PointArrays t = treesDFS.getTrees();
+            /*计算最优砍树方案*/
+            CutTreesBFS treesBFS = new CutTreesBFS(n,m,fire,map,t,cutNum);
+            Node cut = treesBFS.getCuttingScheme();
+            System.out.println("#"+(i+1)+": "+cut.priority);
         }
 
-        /*计算初始能烧的树的坐标*/
-        BurningTreesDFS treesDFS = new BurningTreesDFS(n,m,fire,map);
-        PointArrays t = treesDFS.getTrees();
-        /*计算最优砍树方案*/
-        CutTreesBFS treesBFS = new CutTreesBFS(n,m,fire,map,t,cutNum);
-        Node cut = treesBFS.getCuttingScheme();
-        System.out.println(cut.priority);
     }
-
 }
