@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LogBook</title>
+</head>
+
+<body style="background-color: #00FF7F">
+<div style="width:100px;height:40px;margin: auto; font-size: 24px">日志本</div>
+
+<form action="" >
+    <div style=" width: 80%;height: 450px;display: flex;margin: auto">
+        <input type="text" id="testData" style="background-color: #7FFFAA;width: 100%;height: 100%">
+    </div>
+    <br>
+    <div style="display: flex;width:240px;height:40px;margin: auto;">
+        <input type="button" value="保存当前日志" onclick="addData()"style="margin-right: 10px;background-color: #7FFFAA;border-radius: 6px;">
+        <input type="button" value="删除全部日志" onclick="deleteItems()"style="background-color: #7FFFAA;border-radius: 6px;"></div>
+
+</form>
+<div style="display: flex;width:200px;height:20px;margin: 20px 20px 20px 190px; font-size: 18px">历史记录：</div>
+<div style="display: flex;width:80%;height:auto;margin: auto;">
+    <table id="allData" border="1"></table>
+</div>
+
+</body>
+<script>
+    var allData = document.getElementById("allData");
+    refreshData(); ///刷新数据显示
+    function refreshData() {
+        var length = localStorage.length;
+        if (length == 0) {
+            allData.innerHTML = "目前暂无数据："
+        } else {
+            allData.innerHTML = "<tr><th>序号</th><th>目标内容</th><th>保存时间</th><th>操作</th></tr>"
+            for (var i = 0; i < length; i++) {
+                var j = i + 1;
+                var tr = document.createElement("tr");
+                var name = localStorage.key(i);
+                console.log(name);
+
+                tr.innerHTML = '<td>' + j + '</td><td>' + name + '</td><td>' + localStorage.getItem(name) +
+                    '</td><td><button οnclick="delData(' + i + ')" style="background-color: #7FFFAA;border-radius: 6px;">删除</button></td>';
+                // '</td><td><button οnclick="delData(' + i + ')">deldete</buttoon></td>';
+                allData.appendChild(tr);
+            }
+        }
+    }
+
+    function addData() {
+        var length = localStorage.length;
+        var n = length + 1;
+        var test = document.getElementById('testData');
+        var value = test.value;
+        var now = new Date();
+        var keytime = now.toLocaleString();
+        localStorage.setItem(value, keytime);
+        test.value = ""; //输入框为空 再刷新一次页面
+        refreshData();
+    }
+
+    function delData(n) {
+        var name = localStorage.key(n);
+        localStorage.removeItem(name);
+        refreshData();
+    }
+
+    function deleteItems() {
+        localStorage.clear();
+        refreshData();
+    }
+</script>
+
+</html>

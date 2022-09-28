@@ -1,0 +1,53 @@
+/*自定义动画效果*/
+@keyframes myframe{
+    from{
+        transform:scale(1.0,1.0);
+    }
+    to{
+        transform:scale(1.3,1.3);
+    }
+}
+/*菜单区域设置*/
+nav{
+    width:500px;
+    text-align:center;
+    font-size:30px;
+    font-weight:bold;
+    font-family:Arial, Helvetica, sans-serif;/*每个字符按照 Arial、Helvetica、无衬线字体、宋体的顺序来渲染*/
+    color: white;
+}
+
+/*菜单设置统一样式*/
+div{
+    //border: 1px solid;/*像素 实线*/
+    width:180px;
+    height:400px;
+    line-height:100px;
+    float:left;
+    margin:20px;
+}
+/*鼠标悬浮事件设置*/
+div:hover{
+    animation: myframe 0.5s forwards;
+}
+/*背景颜色设置*/
+.s01{
+    background-image: url("1.jpeg");
+    background-size: cover;
+    //background-color:#66F;
+}
+.s02{
+    background-image: url("2.jpeg");
+    background-size: cover;
+ //   background-color:rgb(82, 82, 221);
+}
+.s03{
+    background-image: url("3.jpeg");
+    background-size: cover;
+  //  background-color:rgb(81, 81, 202);
+}
+.s04{
+    background-image: url("6.jpeg");
+    background-size: cover;
+   // background-color:rgb(50, 50, 126);
+}
