@@ -39,6 +39,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        long st = System.currentTimeMillis();
         while (sc.hasNext()){
             /*数据输入和初始化*/
             String str = sc.nextLine();
@@ -70,7 +71,8 @@ public class Main {
             System.out.println("");
         }
 
-
+        long e = System.currentTimeMillis();
+        System.out.println("计算时长："+(e-st)+"ms");
     }
 
     /**
@@ -99,3 +101,9 @@ public class Main {
         }
     }
 }
+/*
+7 1 2 3 4 5 6 7
+8 1 2 3 5 8 13 21 34
+0
+
+*/

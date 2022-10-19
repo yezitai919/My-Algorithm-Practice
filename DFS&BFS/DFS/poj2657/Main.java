@@ -22,66 +22,55 @@ public class Main {
      */
     static boolean[] m;
 
+    static int ans;
     /**
      * 找到目标
      */
     static boolean succeed;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()){
-            String str = sc.nextLine();
-            String[] s = str.split(" ");
-/*            if (s[0]==" "){
-                break;
-            }*/
-            n = Integer.parseInt(s[0]);
-            z = Integer.parseInt(s[1]);
-            m = new boolean[n];
-            int t = Integer.parseInt(s[2]);
-            if (t!=0){
-                String str2 = sc.nextLine();
-                String[] s2 = str2.split(" ");
-                /*标记阻碍格*/
-                for (int i = 0; i < t; i++) {
-                    m[Integer.parseInt(s2[i])-1]=true;
-                }
-            }
-            succeed = false;
-            for (int i = 1; i < n; i++) {
-                dfs(0,i);
-                if (succeed){
-                    System.out.println(i);
-                    break;
-                }
-            }
 
+
+        n = sc.nextInt();
+        z = sc.nextInt();
+        m = new boolean[n];
+        int t = sc.nextInt();
+        for (int i = 0; i < t; i++) {
+            m[sc.nextInt()-1] = true;
         }
+        ans = z;
+        succeed = false;
+        for (int i = 1; i < z; i++) {
+            if (succeed){
+               break;
+            }
+            dfs(0, i);
+        }
+        System.out.println(ans);
     }
 
     /**
      * @param index 当前下标
-     * @param k 当前子树的k
+     * @param k     当前子树的k
      */
     private static void dfs(int index, int k) {
         /*找到目标*/
-        if (index==z-1){
+        if (index == z - 1) {
+            ans = k;
             succeed = true;
             return;
         }
         /*遇到阻碍块或者重复块(说明会一直重复跳不到k)，直接结束当前分支*/
-        if (m[index]){
+        if (m[index]) {
             return;
         }
         /*标记当前块*/
-        m[index]=true;
+        m[index] = true;
         /*跳跃下一步，如果出界就求余循环*/
-        if (index+k<n){
-            dfs(index+k,k);
-        }else {
-            dfs((index+k)%(n-1),k);
-        }
+        dfs((index+k)%n,k);
         /*回溯*/
-        m[index]=false;
+        m[index] = false;
     }
 }
 /*这题一时没看出来和dfs有啥关系，感觉像是循环就能解决的事，后来发现它是章鱼一样的树，

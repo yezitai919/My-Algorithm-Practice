@@ -1,6 +1,6 @@
 package poj2488;
 
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 /**
@@ -52,10 +52,10 @@ public class Main {
     static boolean possibility;
     public static void main(String[] args) {
   /*      String str = (char)('A'+1)+""+2;
-        System.out.println(str);*/
+        System.out.println(str); */
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-
+        long st = System.currentTimeMillis();
         for (int i = 0; i < n; i++) {
             q = sc.nextInt();
             p = sc.nextInt();
@@ -89,6 +89,8 @@ public class Main {
             }
 
         }
+        long e = System.currentTimeMillis();
+        System.out.println("计算时长："+(e-st)+"ms");
     }
 
 
